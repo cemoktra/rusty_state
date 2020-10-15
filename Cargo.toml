@@ -3,6 +3,11 @@ name = "rusty_state"
 version = "0.1.0"
 authors = ["cemoktra <bazz-dee@gmx.de>"]
 edition = "2018"
+description = "A simple state machine for rust"
+readme = "README.md"
+homepage = "https://github.com/cemoktra/rusty_state"
+license = "MIT"
+keywords = ["state-machine"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
