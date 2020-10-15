@@ -1,3 +1,6 @@
+![CI](https://github.com/cemoktra/rusty_state/workflows/CI/badge.svg)
+
+
 # rusty_state
 A simple state machine for rust
 
