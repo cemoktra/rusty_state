@@ -3,8 +3,12 @@
 pub struct TranstionNotAllowed;
 
 /// Trait that must be implemented by state enumerations
-pub trait State<T: Copy> {
-    fn transition_allowed(self, new_state: T) -> bool;
+pub trait State {
+    fn transition_allowed(self, new_state: &Self) -> bool;
+}
+
+pub trait Feature<T: State> {
+    fn allowed(self, state: &T) -> bool;
 }
 
 /// State machine
@@ -15,16 +19,20 @@ pub struct StateMachine<T> {
     state: T
 }
 
-impl<T: State<T> + Copy> StateMachine<T> {
+impl<T: State + Copy> StateMachine<T> {
   /// Create a new state machine
   /// 
   /// # Arguments
   /// 
   /// * `state` - initial state
   pub fn new(state: T) -> StateMachine<T> {
-      StateMachine {
-          state: state
-      }
+    StateMachine {
+      state: state
+    }
+  }
+
+  pub fn feature_allowed<U: Feature<T> + Copy>(self, feature: &U) -> bool {
+    feature.allowed(&self.state)
   }
 
   /// Starts a state transition
@@ -32,9 +40,9 @@ impl<T: State<T> + Copy> StateMachine<T> {
   /// # Arguments
   /// 
   /// * `new_state` - try transtion to this state
-  pub fn set(&mut self, new_state: T) -> Result<(), TranstionNotAllowed> {
-      if self.state.transition_allowed(new_state) {
-          self.state = new_state;
+  pub fn set(&mut self, new_state: &T) -> Result<(), TranstionNotAllowed> {
+      if self.state.transition_allowed(&new_state) {
+          self.state = *new_state;
           Ok(())
       } else {
           Err(TranstionNotAllowed {})
