@@ -18,7 +18,7 @@ enum TrafficLight {
 }
 
 // implement State trait for state enumeration
-impl State<TrafficLight> for TrafficLight {
+impl State for TrafficLight {
     fn transition_allowed(self, new_state: TrafficLight) -> bool {
         match (self, new_state) {
             (TrafficLight::Red, TrafficLight::RedYellow) => true,
