@@ -1,5 +1,4 @@
-![CI](https://github.com/cemoktra/rusty_state/workflows/CI/badge.svg)
-
+[![Build Status](https://github.com/cemoktra/rusty_state/workflows/CI/badge.svg)](https://github.com/cemoktra/rusty_state/actions)
 
 # rusty_state
 A simple state machine for rust
